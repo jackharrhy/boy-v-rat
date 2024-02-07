@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy3yebk06v3y"]
+
+[ext_resource type="PackedScene" uid="uid://b4ehogji2x2ui" path="res://modules/boy/boy.tscn" id="1_q7s4i"]
+[ext_resource type="PackedScene" uid="uid://bkm15137ucxpo" path="res://modules/rat_spawner/rat_spawner.tscn" id="3_0e70o"]
+
+[node name="Root" type="Node2D"]
+
+[node name="Boy" parent="." node_paths=PackedStringArray("root_node") instance=ExtResource("1_q7s4i")]
+root_node = NodePath("..")
+
+[node name="Camera2D" type="Camera2D" parent="Boy"]
+zoom = Vector2(0.5, 0.5)
+
+[node name="Polygon2D" type="Polygon2D" parent="Boy/Camera2D"]
+z_index = -1
+scale = Vector2(20, 20)
+polygon = PackedVector2Array(-100, 100, 100, 100, 100, -100, -100, -100)
+
+[node name="RatSpawner" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0e70o")]
+target = NodePath("../Boy")
