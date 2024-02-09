@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbelmtf3v3ke2"]
+
+[ext_resource type="Script" path="res://modules/main/menu.gd" id="1_nuc8b"]
+[ext_resource type="Texture2D" uid="uid://cnmyv3y6gr6fn" path="res://assets/boy-front-on.png" id="2_t2qs2"]
+
+[sub_resource type="SystemFont" id="SystemFont_23quh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xd2y5"]
+font = SubResource("SystemFont_23quh")
+font_size = 76
+font_color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_nuc8b")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 60
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 25
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+text = "boy v rat"
+label_settings = SubResource("LabelSettings_xd2y5")
+
+[node name="Button" type="Button" parent="HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 31
+text = "play"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("2_t2qs2")
+stretch_mode = 3
+
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/Button" to="." method="_on_button_pressed"]

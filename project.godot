@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="boy-v-rat"
-run/main_scene="res://modules/main/main.tscn"
+run/main_scene="res://modules/menu/menu.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -46,3 +46,4 @@ left={
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)

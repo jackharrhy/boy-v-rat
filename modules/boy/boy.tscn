@@ -4,6 +4,21 @@
 [ext_resource type="Texture2D" uid="uid://cnht7sajhrh0a" path="res://assets/boy-body-from-top.png" id="1_wuy5g"]
 [ext_resource type="Texture2D" uid="uid://w53afnmaf7og" path="res://assets/boy-tail-from-top.png" id="3_f2klo"]
 
+[sub_resource type="Animation" id="Animation_cx7iv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite/TailSprite:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.136136]
+}
+
 [sub_resource type="Animation" id="Animation_e6dq3"]
 resource_name = "tail_wiggle"
 loop_mode = 1
@@ -20,28 +35,13 @@ tracks/0/keys = {
 "values": [-0.136136, 0.165806, -0.136136]
 }
 
-[sub_resource type="Animation" id="Animation_cx7iv"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("BodySprite/TailSprite:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-0.136136]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yg5pr"]
 _data = {
 "RESET": SubResource("Animation_cx7iv"),
 "tail_wiggle": SubResource("Animation_e6dq3")
 }
 
-[node name="Boy" type="CharacterBody2D"]
+[node name="Boy" type="CharacterBody2D" groups=["boy"]]
 script = ExtResource("1_wqqrd")
 
 [node name="BodySprite" type="Sprite2D" parent="."]
@@ -69,6 +69,7 @@ libraries = {
 }
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
 autostart = true
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

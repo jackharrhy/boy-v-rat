@@ -10,6 +10,6 @@ func _process(delta):
 	var collision = move_and_collide(velocity * delta)
 	if collision:
 		var collider = collision.get_collider()
-		if "IS_RAT" in collider:
+		if collider.is_in_group("rat"):
 			collider.queue_free()
 			queue_free()

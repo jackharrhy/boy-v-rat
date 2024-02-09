@@ -1,10 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://cidkx0gfxmwb4"]
+[gd_scene load_steps=8 format=3 uid="uid://cidkx0gfxmwb4"]
 
 [ext_resource type="Texture2D" uid="uid://bocxdoeky5ugt" path="res://assets/rat-body-from-top.png" id="1_8bs0h"]
 [ext_resource type="Script" path="res://modules/rat/rat.gd" id="1_svthj"]
 [ext_resource type="Texture2D" uid="uid://boerm7w42to2n" path="res://assets/rat-tail-from-top.png" id="2_v6s0p"]
 
-[sub_resource type="Animation" id="Animation_jhwgp"]
+[sub_resource type="Animation" id="Animation_dj6bh"]
 resource_name = "tail_wiggle"
 loop_mode = 1
 tracks/0/type = "value"
@@ -17,10 +17,10 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [0.0, -0.349066, 0.0]
+"values": [0.151844, -0.436332, 0.151844]
 }
 
-[sub_resource type="Animation" id="Animation_lfo2n"]
+[sub_resource type="Animation" id="Animation_u3dxg"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -32,37 +32,73 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [0.0]
+"values": [0.151844]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BodySprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.4, 0.4)]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_idxlw"]
+[sub_resource type="Animation" id="Animation_h0bxy"]
+resource_name = "fade_in"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BodySprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.4, 0.4)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mqc5v"]
 _data = {
-"RESET": SubResource("Animation_lfo2n"),
-"tail_wiggle": SubResource("Animation_jhwgp")
+"RESET": SubResource("Animation_u3dxg"),
+"fade_in": SubResource("Animation_h0bxy"),
+"tail_wiggle": SubResource("Animation_dj6bh")
 }
 
-[node name="Rat" type="CharacterBody2D"]
-scale = Vector2(0.4, 0.4)
-collision_layer = 5
+[node name="Rat" type="RigidBody2D" groups=["rat"]]
+collision_layer = 3
+gravity_scale = 0.0
 script = ExtResource("1_svthj")
 
 [node name="BodySprite" type="Sprite2D" parent="."]
-position = Vector2(1, 1)
+unique_name_in_owner = true
+position = Vector2(0.4, 0.4)
 rotation = -1.5708
+scale = Vector2(0.4, 0.4)
 texture = ExtResource("1_8bs0h")
 
 [node name="TailSprite" type="Sprite2D" parent="BodySprite"]
 position = Vector2(-0.99999, -101)
+rotation = 0.151844
 scale = Vector2(0.513423, 0.513423)
 texture = ExtResource("2_v6s0p")
 offset = Vector2(55, -110)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-position = Vector2(-1, 0)
+unique_name_in_owner = true
+position = Vector2(-0.4, 0)
+scale = Vector2(0.4, 0.4)
 polygon = PackedVector2Array(-100, 0, -76, -30, -49, -52, -21, -53, -2, -41, 34, -40, 71, -28, 102, -10, 99, 6, 67, 32, 55, 32, 33, 47, 0, 48, -33, 63, -55, 57, -77, 34, -99, 10)
+disabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
 libraries = {
-"": SubResource("AnimationLibrary_idxlw")
+"": SubResource("AnimationLibrary_mqc5v")
 }
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -11,10 +11,5 @@ root_node = NodePath("..")
 [node name="Camera2D" type="Camera2D" parent="Boy"]
 zoom = Vector2(0.5, 0.5)
 
-[node name="Polygon2D" type="Polygon2D" parent="Boy/Camera2D"]
-z_index = -1
-scale = Vector2(20, 20)
-polygon = PackedVector2Array(-100, 100, 100, 100, 100, -100, -100, -100)
-
 [node name="RatSpawner" parent="." node_paths=PackedStringArray("target") instance=ExtResource("3_0e70o")]
 target = NodePath("../Boy")

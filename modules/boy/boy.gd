@@ -5,7 +5,6 @@ extends CharacterBody2D
 const SPEED : float = 300.0
 var target_angle : float
 var alive : bool = true
-const IS_BOY = true
 
 
 func _ready():
